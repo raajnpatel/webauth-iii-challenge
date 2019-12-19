@@ -5,10 +5,10 @@ const Users = require('./users-model.js');
 const restricted = require('./restricted-middleware.js');
 
 router.post('/register', (req, res) => {
-    let {username, password}= req.body;
+    let {username, password, department}= req.body;
     const hash = bcrypt.hashSync(password, 8); // 2 ^ n
 
-    Users.add({username, password: hash})
+    Users.add({username, password: hash, department})
         .then(saved => {
             res.status(201).json(saved);
         })
